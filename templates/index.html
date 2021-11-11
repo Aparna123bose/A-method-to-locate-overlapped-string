@@ -1,0 +1,69 @@
+<html>
+	<link href="static/index.css" rel="stylesheet"/>
+	<script src="static/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#search").click(function(){
+				text=$("#text").val();
+				pattern=$("#pattern").val();
+				if(text == '')
+				{
+					alert('Text should not be empty!');
+				}
+				else if(pattern=='')
+				{
+					alert('Pattern should not be empty!');
+				}
+				else
+				{
+					$.ajax({
+						type:"post",
+						url:"/search",
+						data:{'text':text,'pattern':pattern},
+						success:function(data){
+							$("#output").html(data);
+						}
+					});
+				}
+			});
+			$("#clear").click(function(){
+				$("#text").val('');
+				$("#pattern").val('');
+				$("#output").html('');
+			});
+		});
+	</script>
+	<head>
+		<title>Logical Matching</title>
+	</head>
+	<body>
+	   
+		<div class="container">
+			
+			
+				<div>	<span class="text-label">Enter a text</span>
+					<input type="text" id="text" class="input-text"/>
+				</div>
+			
+			
+				<div>	<span class="text-label">Enter a pattern</span>
+					<input type="text" id="pattern" class="input-text"/>
+				</div>
+			
+			
+				
+				<div>
+					<button type="button" id="search">Search</button>
+					<button type="button" id="clear">Clear</button>
+				</div>
+			
+		
+		</div>
+		
+			<h2>Output</h2>
+			<div id="output">
+			</div>
+	  
+		
+	</body>
+</html>

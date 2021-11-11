@@ -1,0 +1,31 @@
+<h4>
+	{% if data %}
+	The pattern <span style="color:green">'{{pattern}}'</span> repeats in the text <span style="color:green">'{{text}}'</span> in the locations of 
+	{% for loc in data %}
+
+		<span style="color:white">&nbsp(</span>
+
+		{% for index in loc %}
+
+			<span style="color:white">{{index}}</span>
+
+			{% if index == loc|last %}
+				<span style="color:white">)</span>
+			{% else %}
+				<span style="color:white">,</span>
+			{% endif %}
+			
+		{% endfor %}
+
+		{% if loc == data|last %}
+			<span>.</span>
+		{% else %}
+			<span>,</span>
+		{% endif %}
+
+	{% endfor %}
+	{% else %}
+		<span>No match</span>
+	{% endif %}
+	
+</h4>
